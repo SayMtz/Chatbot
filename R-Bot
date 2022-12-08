@@ -1,0 +1,39 @@
+import pyttsx3 as voz
+from gtts import gTTS
+#import speech_recognition as sr (reconocimiento de voz)
+
+#configuración de la voz del asistente
+voice=voz.init()
+voices=voice.getProperty('voices')
+voice.setProperty('voice',voices[3].id)
+voice.setProperty('rate',140)
+
+def say(text):
+    voice.say(text)
+    voice.runAndWait()
+
+def contenedor1():
+    say(f'¡Hola! Soy R-Bot, tu asistente inteligente de reciclaje')
+    say(f'En este contenedor blanco solo ingresar residuos aprovechables como (plastico, carton, vidrio y papel)')
+
+def contenedor2():
+    say(f'¡Hola! Soy R-Bot, tu asistente inteligente de reciclaje')
+    say(f'En este contenedor verde solo ingresar residuos organicos aprovechables como (restos de comida y desechos de cultivo)')
+    
+def contenedor3():
+    say(f'¡Hola! Soy R-Bot, tu asistente inteligente de reciclaje')
+    say(f'En este contenedor negro solo ingresar residuos no aprovechables como (papel higienico, servilletas, papeles y cartones contaminados con comida, papeles metalizados y residuos covid-19)')
+
+def error():
+    print('error')
+
+switch_contenedor = {
+    '1': contenedor1,
+    '2': contenedor2,
+    '3': contenedor3
+}
+
+sensor = input()
+
+#tomamos la función asociada a la variable y la invocamos
+switch_contenedor.get(sensor, error)()
